@@ -1,6 +1,6 @@
-import { Component, Host, Listen, h, State, Element } from '@stencil/core';
-import { urls, listTitles} from '../../constants/constant.js';
-import {Expense} from '../../interfaces/expense';
+import { Component, Listen, h, State, Element } from '@stencil/core';
+import { urls } from '../../constants/constant.js';
+import { Expense } from '../../interfaces/expense';
 import axios from 'axios';
 
 @Component({
@@ -14,7 +14,6 @@ export class AppRoot {
   @State() updatingData: Expense = null;
   @State() newItem: Expense = null;
 
-
   componentDidLoad() {
     this.getData();
     if (localStorage.getItem('dark')) {
@@ -23,16 +22,14 @@ export class AppRoot {
     }
   }
 
-
-
   getData = () => {
     axios(urls.URL_EXPENSES)
-    .then(response => response.data.expenses)
-    .then(expenses => {
-      this.list = expenses;
-    })
-    .catch(ex => {})
-  }
+      .then(response => response.data.expenses)
+      .then(expenses => {
+        this.list = expenses;
+      })
+      .catch(() => {});
+  };
 
   @Listen('updateLinkItem', { target: 'body' })
   updateForm(event: CustomEvent<any>) {
@@ -42,16 +39,13 @@ export class AppRoot {
   @Listen('updateListItem', { target: 'body' })
   onSaveClick(event: CustomEvent<any>) {
     const newValue = event.detail;
-    const founIndex = this.list.findIndex((item) => item.id === newValue.id);
-    debugger
-    if(founIndex > -1) {
+    const founIndex = this.list.findIndex(item => item.id === newValue.id);
+    if (founIndex > -1) {
       this.list[founIndex] = newValue;
-    }
-    else {
-      this.list = [...this.list, newValue]
+    } else {
+      this.list = [...this.list, newValue];
     }
   }
-
 
   @Listen('deleteItem', { target: 'body' })
   onDeleteClick(event: CustomEvent<any>) {
@@ -60,16 +54,14 @@ export class AppRoot {
     }
 
     const itemId = event.detail.id;
-    const itemName = event.detail.name;
 
     this.sendDeleteRequest(this.apiUrl, itemId).then(
       () => {
         const itemList = this.list.filter(d => d['id'] !== itemId);
         this.list = itemList;
-        alert('item was deleted')
+        alert('item was deleted');
       },
-      err => {
-      },
+      () => {},
     );
   }
 
@@ -98,6 +90,7 @@ export class AppRoot {
         <main class="content">
           <app-expenses-form updatingData={this.updatingData}></app-expenses-form>
           <app-expenses-list list={this.list}></app-expenses-list>
+          <app-stacked-chart data={this.list}></app-stacked-chart>
         </main>
       </div>
     );

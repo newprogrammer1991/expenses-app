@@ -10,12 +10,13 @@
     "test.watch": "stencil test --spec --e2e --watchAll",
     "generate": "stencil generate"
   },
-
   "dependencies": {
     "@stencil/core": "^4.0.0",
-    "axios": "^1.4.0"
+    "axios": "^1.4.0",
+    "chart.js": "^4.3.0",
+    "chartjs-adapter-moment": "^1.0.1",
+    "moment": "^2.29.4"
   },
-
   "devDependencies": {
     "@stencil/postcss": "^2.1.0",
     "@types/jest": "^27.5.2",
