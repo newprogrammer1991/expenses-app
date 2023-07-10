@@ -33,6 +33,8 @@ export namespace Components {
     interface AppStackedChart {
         "data": Expense[];
     }
+    interface AppSwitchBtn {
+    }
 }
 export interface AppExpensesFormCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -41,6 +43,10 @@ export interface AppExpensesFormCustomEvent<T> extends CustomEvent<T> {
 export interface AppExpensesListCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLAppExpensesListElement;
+}
+export interface AppSwitchBtnCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLAppSwitchBtnElement;
 }
 declare global {
     interface HTMLAppButtonElement extends Components.AppButton, HTMLStencilElement {
@@ -79,6 +85,12 @@ declare global {
         prototype: HTMLAppStackedChartElement;
         new (): HTMLAppStackedChartElement;
     };
+    interface HTMLAppSwitchBtnElement extends Components.AppSwitchBtn, HTMLStencilElement {
+    }
+    var HTMLAppSwitchBtnElement: {
+        prototype: HTMLAppSwitchBtnElement;
+        new (): HTMLAppSwitchBtnElement;
+    };
     interface HTMLElementTagNameMap {
         "app-button": HTMLAppButtonElement;
         "app-expenses-form": HTMLAppExpensesFormElement;
@@ -86,6 +98,7 @@ declare global {
         "app-input": HTMLAppInputElement;
         "app-root": HTMLAppRootElement;
         "app-stacked-chart": HTMLAppStackedChartElement;
+        "app-switch-btn": HTMLAppSwitchBtnElement;
     }
 }
 declare namespace LocalJSX {
@@ -117,6 +130,9 @@ declare namespace LocalJSX {
     interface AppStackedChart {
         "data"?: Expense[];
     }
+    interface AppSwitchBtn {
+        "onSwithBtnChanged"?: (event: AppSwitchBtnCustomEvent<boolean>) => void;
+    }
     interface IntrinsicElements {
         "app-button": AppButton;
         "app-expenses-form": AppExpensesForm;
@@ -124,6 +140,7 @@ declare namespace LocalJSX {
         "app-input": AppInput;
         "app-root": AppRoot;
         "app-stacked-chart": AppStackedChart;
+        "app-switch-btn": AppSwitchBtn;
     }
 }
 export { LocalJSX as JSX };
@@ -136,6 +153,7 @@ declare module "@stencil/core" {
             "app-input": LocalJSX.AppInput & JSXBase.HTMLAttributes<HTMLAppInputElement>;
             "app-root": LocalJSX.AppRoot & JSXBase.HTMLAttributes<HTMLAppRootElement>;
             "app-stacked-chart": LocalJSX.AppStackedChart & JSXBase.HTMLAttributes<HTMLAppStackedChartElement>;
+            "app-switch-btn": LocalJSX.AppSwitchBtn & JSXBase.HTMLAttributes<HTMLAppSwitchBtnElement>;
         }
     }
 }

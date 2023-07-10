@@ -1,7 +1,7 @@
 .expenses {
   padding: 32px 16px;
-  border-right: 1px solid var(--light-web-background-tertiary, #e2e5e9);
-  background: var(--light-web-background-primary, #fff);
+  border-right: 1px solid var(--light-web-background-tertiary);
+  background: var(--light-web-background-primary);
 }
 
 .expenses__form-inputs {

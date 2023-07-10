@@ -1,5 +1,4 @@
-import { Component, Prop, State, h } from '@stencil/core';
-import { CONTROL_SIZES, SIZES } from '../../constants/constant';
+import { Component, Prop, h } from '@stencil/core';
 
 @Component({
   tag: 'app-button',

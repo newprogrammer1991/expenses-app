@@ -1,8 +1,12 @@
 :host {
   display: block;
+  padding: 24px 32px;
+  border-radius: 16px;
+  border: 1px solid var(--light-web-background-tertiary);
+  background: #fff;
 }
 
 .chartContainer {
   height: 50vh;
-  width: 50vw;
+  width: 90%;
 }

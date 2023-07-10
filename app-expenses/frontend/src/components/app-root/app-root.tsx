@@ -1,7 +1,13 @@
-import { Component, Listen, h, State, Element } from '@stencil/core';
+import { Component, Listen, h, State } from '@stencil/core';
 import { urls } from '../../constants/constant.js';
 import { Expense } from '../../interfaces/expense';
+import { themes } from '../../theme/theme';
 import axios from 'axios';
+
+enum Themes {
+  light = 'light',
+  dark = 'dark',
+}
 
 @Component({
   tag: 'app-root',
@@ -13,13 +19,11 @@ export class AppRoot {
   @State() list: Expense[] = [];
   @State() updatingData: Expense = null;
   @State() newItem: Expense = null;
+  @State() activeLightMode = true;
 
   componentDidLoad() {
     this.getData();
-    if (localStorage.getItem('dark')) {
-      // this.el.shadowRoot.querySelector('#my-id').classList.toggle('dark');
-      // this.themeMode = 'dark';
-    }
+    this.setTheme('light');
   }
 
   getData = () => {
@@ -65,6 +69,11 @@ export class AppRoot {
     );
   }
 
+  @Listen('swithBtnChanged', { target: 'body' })
+  swithBtnChanged() {
+    this.toggleTheme();
+  }
+
   sendDeleteRequest = async (apiUrl, id) => {
     try {
       const result = await axios.delete(`${apiUrl}/${id}`, {
@@ -81,16 +90,32 @@ export class AppRoot {
     }
   };
 
+  toggleTheme = () => {
+    this.activeLightMode = !this.activeLightMode;
+    const mode = this.activeLightMode ? Themes.light : Themes.dark;
+    this.setTheme(mode);
+  };
+
+  setTheme = (mode: string) => {
+    const theme = themes[mode];
+    for (const key in theme) {
+      document.body.style.setProperty(key, theme[key]);
+    }
+  };
+
   render() {
     return (
       <div>
-        {/* <header>
-          <h1>Bettson</h1>
-        </header> */}
+        <div class="theme-mode-wrap">
+          Dark mode
+          <app-switch-btn></app-switch-btn>
+        </div>
         <main class="content">
           <app-expenses-form updatingData={this.updatingData}></app-expenses-form>
-          <app-expenses-list list={this.list}></app-expenses-list>
-          <app-stacked-chart data={this.list}></app-stacked-chart>
+          <div class="content__right">
+            <app-expenses-list list={this.list}></app-expenses-list>
+            <app-stacked-chart data={this.list}></app-stacked-chart>
+          </div>
         </main>
       </div>
     );

@@ -1,7 +1,7 @@
 .form-element__label {
   display: inline-block;
   margin-bottom: 5px;
-  color: var(--light-web-text-primary, #2b313b);
+  color: var(--light-web-text-primary);
   font-size: 14px;
   font-weight: 400;
   line-height: 16px;
@@ -12,6 +12,6 @@
   padding: 8px 12px;
   align-items: center;
   border-radius: 8px;
-  border: 1px solid var(--light-web-background-tertiary, #e2e5e9);
-  background: var(--light-web-background-secondary, #f1f2f4);
+  border: 1px solid var(--light-web-background-tertiary);
+  background: var(--light-web-background-secondary);
 }

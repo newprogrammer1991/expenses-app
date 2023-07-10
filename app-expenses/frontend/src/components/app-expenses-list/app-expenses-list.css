@@ -3,14 +3,14 @@
 }
 .expenses {
   border-radius: 16px;
-  border: 1px solid var(--light-web-background-tertiary, #e2e5e9);
+  border: 1px solid var(--light-web-background-tertiary);
   background: #fff;
 }
 
 .expenses__items {
   padding: 24px 32px;
   border-radius: 16px;
-  border: 1px solid var(--light-web-background-tertiary, #e2e5e9);
+  border: 1px solid var(--light-web-background-tertiary);
   background: #fff;
 }
 
@@ -19,18 +19,18 @@
   justify-content: space-between;
   align-items: center;
   padding: 16px 0;
-  border-bottom: 1px solid var(--light-web-background-tertiary, #e2e5e9);
+  border-bottom: 1px solid var(--light-web-background-tertiary);
 }
 
 .expenses__item-date {
-  color: var(--light-web-text-secondary, #626f84);
+  color: var(--light-web-text-secondary);
   font-size: 12px;
   font-weight: 400;
   line-height: 20px;
 }
 
 .expenses__item-desc {
-  color: var(--light-web-text-primary, #2b313b);
+  color: var(--light-web-text-primary);
   font-size: 14px;
   font-weight: 500;
   line-height: 20px;
@@ -39,7 +39,7 @@
 .expenses__item-amount {
   display: flex;
   justify-content: center;
-  color: var(--light-web-text-primary, #2b313b);
+  color: var(--light-web-text-primary);
   font-size: 18px;
   font-weight: 600;
   line-height: 20px;
