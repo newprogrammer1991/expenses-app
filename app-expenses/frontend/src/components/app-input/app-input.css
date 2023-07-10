@@ -1,18 +1,17 @@
 .form-element__label {
-    display: inline-block;
-    margin-bottom: 5px;
-    color: var(--light-web-text-primary, #2B313B);
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 16px;
-
+  display: inline-block;
+  margin-bottom: 5px;
+  color: var(--light-web-text-primary, #2b313b);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16px;
 }
 
 .form-element__input {
- min-width: 137px;
- padding: 8px 12px;
- align-items: center;
- border-radius: 8px;
- border: 1px solid var(--light-web-background-tertiary, #E2E5E9);
- background: var(--light-web-background-secondary, #F1F2F4);
+  min-width: 137px;
+  padding: 8px 12px;
+  align-items: center;
+  border-radius: 8px;
+  border: 1px solid var(--light-web-background-tertiary, #e2e5e9);
+  background: var(--light-web-background-secondary, #f1f2f4);
 }

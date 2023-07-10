@@ -1,9 +1,9 @@
 .button {
-    cursor: pointer;
-    background: var(--light-web-special-static-green-deep, #44BF78);
-    outline: none;
-    border: none;
-    padding: 8px 25px;
-    border-radius: 100px;
-    color: var(--shades-white, #FFF);
+  cursor: pointer;
+  background: var(--light-web-special-static-green-deep, #44bf78);
+  outline: none;
+  border: none;
+  padding: 8px 25px;
+  border-radius: 100px;
+  color: var(--shades-white, #fff);
 }

@@ -30,6 +30,9 @@ export namespace Components {
     }
     interface AppRoot {
     }
+    interface AppStackedChart {
+        "data": Expense[];
+    }
 }
 export interface AppExpensesFormCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -70,12 +73,19 @@ declare global {
         prototype: HTMLAppRootElement;
         new (): HTMLAppRootElement;
     };
+    interface HTMLAppStackedChartElement extends Components.AppStackedChart, HTMLStencilElement {
+    }
+    var HTMLAppStackedChartElement: {
+        prototype: HTMLAppStackedChartElement;
+        new (): HTMLAppStackedChartElement;
+    };
     interface HTMLElementTagNameMap {
         "app-button": HTMLAppButtonElement;
         "app-expenses-form": HTMLAppExpensesFormElement;
         "app-expenses-list": HTMLAppExpensesListElement;
         "app-input": HTMLAppInputElement;
         "app-root": HTMLAppRootElement;
+        "app-stacked-chart": HTMLAppStackedChartElement;
     }
 }
 declare namespace LocalJSX {
@@ -104,12 +114,16 @@ declare namespace LocalJSX {
     }
     interface AppRoot {
     }
+    interface AppStackedChart {
+        "data"?: Expense[];
+    }
     interface IntrinsicElements {
         "app-button": AppButton;
         "app-expenses-form": AppExpensesForm;
         "app-expenses-list": AppExpensesList;
         "app-input": AppInput;
         "app-root": AppRoot;
+        "app-stacked-chart": AppStackedChart;
     }
 }
 export { LocalJSX as JSX };
@@ -121,6 +135,7 @@ declare module "@stencil/core" {
             "app-expenses-list": LocalJSX.AppExpensesList & JSXBase.HTMLAttributes<HTMLAppExpensesListElement>;
             "app-input": LocalJSX.AppInput & JSXBase.HTMLAttributes<HTMLAppInputElement>;
             "app-root": LocalJSX.AppRoot & JSXBase.HTMLAttributes<HTMLAppRootElement>;
+            "app-stacked-chart": LocalJSX.AppStackedChart & JSXBase.HTMLAttributes<HTMLAppStackedChartElement>;
         }
     }
 }

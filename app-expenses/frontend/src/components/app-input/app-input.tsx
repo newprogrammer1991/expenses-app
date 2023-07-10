@@ -1,4 +1,4 @@
-import { Component, Host, Prop, State, h } from '@stencil/core';
+import { Component, Host, Prop, h } from '@stencil/core';
 
 @Component({
   tag: 'app-input',
@@ -13,7 +13,6 @@ export class InputField {
   @Prop({ mutable: true }) required: boolean;
   @Prop({ mutable: true }) label: string;
   @Prop({ mutable: true }) onChange: any;
-
 
   render() {
     return (
@@ -34,7 +33,6 @@ export class InputField {
               onChange={this.onChange}
             />
           </div>
-
         </div>
       </Host>
     );

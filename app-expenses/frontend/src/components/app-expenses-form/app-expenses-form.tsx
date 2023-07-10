@@ -1,14 +1,11 @@
 import { Component, Event, EventEmitter, Prop, State, Watch, h } from '@stencil/core';
-import { urls, initialExpensesForm, initialExpensesErrorForm } from '../../constants/constant.js';
+import { urls, initialExpensesForm } from '../../constants/constant.js';
 import axios from 'axios';
-import {Expense} from '../../interfaces/expense'
-
-
-
+import { Expense } from '../../interfaces/expense';
 
 const generateId = () => {
   return String(Math.floor(Math.random() * 99999999));
-}
+};
 
 @Component({
   tag: 'app-expenses-form',
@@ -30,7 +27,7 @@ export class AppExpensesForm {
   }
 
   @Watch('updatingData')
-  watchPropHandler(newValue: boolean, oldValue: boolean, propName: string) {
+  watchPropHandler(newValue: boolean) {
     Object.keys(this.formModel).forEach(item => {
       this.formModel[item] = this.updatingData === null ? '' : newValue[item];
     });
@@ -56,15 +53,11 @@ export class AppExpensesForm {
 
   onFormSave = async (updatingData: any) => {
     try {
-      const { success } = await this.sendAddOrUpdateRequest(
-        this.apiUrl,
-        this.formModel,
-        updatingData?.id,
-      );
-      if(!updatingData) {
+      const { success } = await this.sendAddOrUpdateRequest(this.apiUrl, this.formModel, updatingData?.id);
+      if (!updatingData) {
         this.formModel.id = generateId();
       }
-      
+
       if (!success) {
         alert('something wrong');
         return;
@@ -110,59 +103,53 @@ export class AppExpensesForm {
     this.formModel[name] = e.target.value;
   };
 
-
   render() {
     return (
       <div class="expenses">
-        <p>
-          {this.updatingData ? 'UPDATE' : 'ADD NEW'}
-        </p>
-      <form class="expenses__form">
-        <div class="expenses__form-inputs">
-          <app-input
-            name="description"
-            id="description"
-            label={'Description'}
-            required={true}
-            value={this.formModel.description}
-            onChange={(e:any) => {
-              this.onChangeInput(e);
-            }}
-          />
+        <p>{this.updatingData ? 'UPDATE' : 'ADD NEW'}</p>
+        <form class="expenses__form">
+          <div class="expenses__form-inputs">
+            <app-input
+              name="description"
+              id="description"
+              label={'Description'}
+              required={true}
+              value={this.formModel.description}
+              onChange={(e: any) => {
+                this.onChangeInput(e);
+              }}
+            />
 
-          <app-input
-            type="number"
-            name="amount"
-            id="amount"
-            label={'Amount'}
-            required={true}
-            value={this.formModel.amount}
-            onChange={(e: any) => {
-              this.onChangeInput(e);
-            }}
-          />
+            <app-input
+              type="number"
+              name="amount"
+              id="amount"
+              label={'Amount'}
+              required={true}
+              value={this.formModel.amount}
+              onChange={(e: any) => {
+                this.onChangeInput(e);
+              }}
+            />
 
-          <app-input
-            type="date"
-            name="date"
-            id="date"
-            label={'Date'}
-            required={true}
-            value={this.formModel.date}
-            onChange={(e: any) => {
-              this.onChangeInput(e);
-            }}
-          />
+            <app-input
+              type="date"
+              name="date"
+              id="date"
+              label={'Date'}
+              required={true}
+              value={this.formModel.date}
+              onChange={(e: any) => {
+                this.onChangeInput(e);
+              }}
+            />
 
-          <div>
-            <app-button
-              content={this.updatingData ? 'Update' : 'Save'}
-              onClick={(e: any) => this.onFormSubmit(this.updatingData, e)}
-            ></app-button>
+            <div>
+              <app-button content={this.updatingData ? 'Update' : 'Save'} onClick={(e: any) => this.onFormSubmit(this.updatingData, e)}></app-button>
+            </div>
           </div>
-        </div>
-      </form>
-    </div>
+        </form>
+      </div>
     );
   }
 }

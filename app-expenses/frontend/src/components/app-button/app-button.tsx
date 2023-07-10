@@ -11,8 +11,6 @@ export class AppButton {
   @Prop({ mutable: true }) loading: boolean;
   @Prop({ mutable: true }) onClick: any;
 
-
-
   handleClick = e => {
     if (this.loading) {
       e.preventDefault();
@@ -31,9 +29,7 @@ export class AppButton {
     }
 
     if (this.content && !this.loading) {
-      return (
-          <span >{this.content}</span>
-      );
+      return <span>{this.content}</span>;
     }
 
     return <span>{this.content}</span>;
