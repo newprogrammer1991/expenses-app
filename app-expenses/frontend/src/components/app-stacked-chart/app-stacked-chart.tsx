@@ -83,7 +83,7 @@ export class ChartContainer {
 
   render() {
     return (
-      <div class={'сhart-сontainer' + (this.data.length > 0 ? '' : ' hidden')}>
+      <div class={'chart-сontainer' + (this.data.length > 0 ? '' : ' hidden')}>
         <canvas width="400" height="300" />
       </div>
     );

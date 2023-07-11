@@ -37,7 +37,7 @@ export class AppExpensesForm {
   }
 
   @Watch('updatingData')
-  watchPropHandler(newValue: boolean) {
+  watchPropHandler(newValue) {
     Object.keys(this.formModel).forEach(item => {
       this.formModel[item] = this.updatingData === null ? '' : newValue[item];
     });
@@ -50,7 +50,6 @@ export class AppExpensesForm {
 
   isValidForm = () => {
     const obj = {
-      id: this.formModel.id.trim() === '',
       description: this.formModel.description.trim() === '',
       amount: String(this.formModel.amount).trim() === '',
       date: this.formModel.date.trim() === '',
@@ -59,6 +58,10 @@ export class AppExpensesForm {
   };
 
   onFormSubmit = async (updatingData: Expense) => {
+    if (!updatingData) {
+      this.formModel.id = generateId();
+    }
+
     if (!this.isValidForm()) {
       alert('Please fill the required fields');
       return;
@@ -70,10 +73,6 @@ export class AppExpensesForm {
   onFormSave = async (updatingData: Expense) => {
     try {
       const { success } = await this.sendAddOrUpdateRequest(this.apiUrl, this.formModel, updatingData?.id);
-      if (!updatingData) {
-        this.formModel.id = generateId();
-      }
-
       if (!success) {
         alert('something wrong');
         return;
@@ -81,10 +80,10 @@ export class AppExpensesForm {
         this.sendUpdatedData(this.formModel);
         alert('expense was created/updated');
       }
+      this.updatingData = null;
     } catch (ex) {
       alert('something wrong');
     }
-    this.updatingData = null;
   };
 
   sendAddOrUpdateRequest = async (apiUrl: string, formModel: Expense, itemID: string) => {

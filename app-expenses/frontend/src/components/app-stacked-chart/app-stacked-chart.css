@@ -1,6 +1,5 @@
-
 .chart-сontainer {
-  height: 40vh;
+  height: 45vh;
   width: 90%;
   display: block;
   padding: 24px 32px;
@@ -10,6 +9,5 @@
 }
 
 .hidden {
-    display: none;
-
+  visibility: hidden;
 }
