@@ -7,16 +7,16 @@ import { Expense } from '../../interfaces/expense';
 })
 export class AppExpensesList {
   @Prop({ mutable: true }) list: Expense[] = [];
-  @Event({ bubbles: true, composed: true }) updateLinkItem: EventEmitter<any>;
+  @Event({ bubbles: true, composed: true }) updateItem: EventEmitter<Expense>;
 
-  onUpdateLinkClick(row: any) {
-    this.updateLinkItem.emit(row);
+  onUpdateItemClick(item: Expense) {
+    this.updateItem.emit(item);
   }
 
-  @Event({ bubbles: true, composed: true }) deleteItem: EventEmitter<any>;
+  @Event({ bubbles: true, composed: true }) deleteItem: EventEmitter<Expense>;
 
-  onDeleteLinkClick(row: any) {
-    this.deleteItem.emit(row);
+  onDeleteItemClick(item: Expense) {
+    this.deleteItem.emit(item);
   }
   renderItems = () => {
     return this.list.map(item => {
@@ -30,9 +30,9 @@ export class AppExpensesList {
           <div>
             <span class="expenses__item-amount">{item.amount} USD</span>
             <div class="expenses__item-btns">
-              <app-button content="Edit" onClick={() => this.onUpdateLinkClick(item)}></app-button>
+              <app-button content="Edit" onClick={() => this.onUpdateItemClick(item)}></app-button>
 
-              <app-button content="Delete" onClick={() => this.onDeleteLinkClick(item)}></app-button>
+              <app-button content="Delete" onClick={() => this.onDeleteItemClick(item)}></app-button>
             </div>
           </div>
         </div>

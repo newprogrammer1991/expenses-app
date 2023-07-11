@@ -26,7 +26,7 @@ export namespace Components {
         "onChange": any;
         "required": boolean;
         "type": string;
-        "value": string;
+        "value": string | number;
     }
     interface AppRoot {
     }
@@ -113,8 +113,8 @@ declare namespace LocalJSX {
     }
     interface AppExpensesList {
         "list"?: Expense[];
-        "onDeleteItem"?: (event: AppExpensesListCustomEvent<any>) => void;
-        "onUpdateLinkItem"?: (event: AppExpensesListCustomEvent<any>) => void;
+        "onDeleteItem"?: (event: AppExpensesListCustomEvent<Expense>) => void;
+        "onUpdateItem"?: (event: AppExpensesListCustomEvent<Expense>) => void;
     }
     interface AppInput {
         "id"?: string;
@@ -123,7 +123,7 @@ declare namespace LocalJSX {
         "onChange"?: any;
         "required"?: boolean;
         "type"?: string;
-        "value"?: string;
+        "value"?: string | number;
     }
     interface AppRoot {
     }

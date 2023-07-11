@@ -13,7 +13,7 @@ export class ChartContainer {
   data: Expense[];
 
   @Watch('data')
-  protected dataWatcher(newData: Expense[]): void {
+  dataWatcher(newData: Expense[]): void {
     const res = newData.map(item => ({ x: Date.parse(item.date), y: item.amount })).sort((a, b) => a.x - b.x);
     const value = res;
     this.myChartInstance.data.datasets.forEach((dataset: any) => {
@@ -30,12 +30,12 @@ export class ChartContainer {
 
   myChartRef: any;
   myChart: any;
-  protected myChartInstance: any;
+  myChartInstance: any;
   constructor() {
     Chart.register(...registerables);
   }
 
-  protected componentDidLoad(): void {
+  componentDidLoad(): void {
     this.canvas = this.el.shadowRoot.querySelector('canvas');
     this.context = this.canvas.getContext('2d');
 

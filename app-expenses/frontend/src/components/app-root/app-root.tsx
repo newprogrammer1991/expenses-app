@@ -35,7 +35,7 @@ export class AppRoot {
       .catch(() => {});
   };
 
-  @Listen('updateLinkItem', { target: 'body' })
+  @Listen('updateItem', { target: 'body' })
   updateForm(event: CustomEvent<any>) {
     this.updatingData = event.detail;
   }

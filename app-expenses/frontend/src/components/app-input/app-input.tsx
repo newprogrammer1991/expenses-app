@@ -9,7 +9,7 @@ export class InputField {
   @Prop({ mutable: true }) id: string;
   @Prop({ mutable: true }) name: string;
   @Prop({ mutable: true }) type: string;
-  @Prop({ mutable: true }) value: string;
+  @Prop({ mutable: true }) value: string | number;
   @Prop({ mutable: true }) required: boolean;
   @Prop({ mutable: true }) label: string;
   @Prop({ mutable: true }) onChange: any;

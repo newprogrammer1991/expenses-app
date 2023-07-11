@@ -18,7 +18,7 @@ export class AppExpensesForm {
   @State() formModel: {
     id: string;
     description: string;
-    amount: string;
+    amount: number;
     date: string;
   } = initialExpensesForm;
 
@@ -39,7 +39,7 @@ export class AppExpensesForm {
     const obj = {
       id: this.formModel.id.trim() === '',
       description: this.formModel.description.trim() === '',
-      amount: this.formModel.amount.trim() === '',
+      amount: String(this.formModel.amount).trim() === '',
       date: this.formModel.date.trim() === '',
     };
 
@@ -51,7 +51,7 @@ export class AppExpensesForm {
     }
   };
 
-  onFormSave = async (updatingData: any) => {
+  onFormSave = async (updatingData: Expense) => {
     try {
       const { success } = await this.sendAddOrUpdateRequest(this.apiUrl, this.formModel, updatingData?.id);
       if (!updatingData) {
@@ -71,7 +71,7 @@ export class AppExpensesForm {
     this.updatingData = null;
   };
 
-  sendAddOrUpdateRequest = async (apiUrl, formModel, itemID) => {
+  sendAddOrUpdateRequest = async (apiUrl: string, formModel: Expense, itemID: string) => {
     try {
       const result =
         itemID && itemID
