@@ -1,4 +1,7 @@
-:host {
+
+.chart-сontainer {
+  height: 40vh;
+  width: 90%;
   display: block;
   padding: 24px 32px;
   border-radius: 16px;
@@ -6,7 +9,7 @@
   background: #fff;
 }
 
-.chartContainer {
-  height: 40vh;
-  width: 90%;
+.hidden {
+    display: none;
+
 }

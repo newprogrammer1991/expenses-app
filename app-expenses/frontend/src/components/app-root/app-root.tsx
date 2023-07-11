@@ -120,7 +120,7 @@ export class AppRoot {
           <app-expenses-form updatingData={this.updatingData}></app-expenses-form>
           <div class="content__right">
             <app-expenses-list list={this.list}></app-expenses-list>
-            {this.list.length > 0 && <app-stacked-chart data={this.list}></app-stacked-chart>}
+            <app-stacked-chart data={this.list}></app-stacked-chart>
           </div>
         </main>
       </div>
