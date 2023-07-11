@@ -41,7 +41,7 @@ export class AppExpensesList {
   render() {
     return (
       <Host>
-        <div class="expenses__items">{this.renderItems()}</div>
+        <div class="expenses__items">{this.list.length ? this.renderItems() : <h3>No Data</h3>}</div>
       </Host>
     );
   }

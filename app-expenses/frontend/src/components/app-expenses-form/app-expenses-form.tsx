@@ -48,17 +48,18 @@ export class AppExpensesForm {
     this.el.shadowRoot.querySelector('app-input').shadowRoot.querySelector('input').focus();
   }
 
-  onFormSubmit = async (updatingData: Expense, e) => {
-    e.preventDefault();
-
+  isValidForm = () => {
     const obj = {
       id: this.formModel.id.trim() === '',
       description: this.formModel.description.trim() === '',
       amount: String(this.formModel.amount).trim() === '',
       date: this.formModel.date.trim() === '',
     };
+    return !Object.values(obj).includes(true);
+  };
 
-    if (Object.values(obj).includes(true)) {
+  onFormSubmit = async (updatingData: Expense) => {
+    if (!this.isValidForm()) {
       alert('Please fill the required fields');
       return;
     } else {
@@ -110,7 +111,6 @@ export class AppExpensesForm {
 
   @Event({ bubbles: true, composed: true }) updateListItem: EventEmitter<any>;
   sendUpdatedData(item: Expense) {
-    console.log(item);
     this.updateListItem.emit(item);
   }
 
@@ -161,7 +161,7 @@ export class AppExpensesForm {
             />
 
             <div>
-              <app-button content={this.updatingData ? 'Update' : 'Save'} onClick={(e: any) => this.onFormSubmit(this.updatingData, e)}></app-button>
+              <app-button content={this.updatingData ? 'Update' : 'Save'} onClick={() => this.onFormSubmit(this.updatingData)}></app-button>
             </div>
           </div>
         </form>

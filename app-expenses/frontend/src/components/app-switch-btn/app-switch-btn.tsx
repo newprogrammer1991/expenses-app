@@ -1,4 +1,4 @@
-import { Component, Host, Event, h, EventEmitter } from '@stencil/core';
+import { Component, Host, Event, h, EventEmitter, Prop } from '@stencil/core';
 
 @Component({
   tag: 'app-switch-btn',
@@ -6,6 +6,7 @@ import { Component, Host, Event, h, EventEmitter } from '@stencil/core';
   shadow: true,
 })
 export class AppSwitchBtn {
+    @Prop() checked: boolean;
     @Event({ bubbles: true, composed: true }) swithBtnChanged: EventEmitter<boolean>;
 
   render() {
@@ -13,7 +14,7 @@ export class AppSwitchBtn {
       <Host>
         <div>
           <label class="switch-btn">
-            <input type="checkbox" onClick={() => this.swithBtnChanged.emit(true)}/>
+            <input type="checkbox" checked={this.checked} onClick={() => this.swithBtnChanged.emit(true)}/>
             <span class="slider"></span>
           </label>
         </div>

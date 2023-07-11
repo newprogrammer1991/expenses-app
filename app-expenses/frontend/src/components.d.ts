@@ -33,6 +33,7 @@ export namespace Components {
         "data": Expense[];
     }
     interface AppSwitchBtn {
+        "checked": boolean;
     }
 }
 export interface AppExpensesFormCustomEvent<T> extends CustomEvent<T> {
@@ -129,6 +130,7 @@ declare namespace LocalJSX {
         "data"?: Expense[];
     }
     interface AppSwitchBtn {
+        "checked"?: boolean;
         "onSwithBtnChanged"?: (event: AppSwitchBtnCustomEvent<boolean>) => void;
     }
     interface IntrinsicElements {

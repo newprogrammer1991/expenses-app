@@ -1,4 +1,4 @@
-import { Component, Listen, h, State, Element } from '@stencil/core';
+import { Component, Listen, h, State } from '@stencil/core';
 import { urls } from '../../constants/constant.js';
 import { Expense } from '../../interfaces/expense';
 import { themes } from '../../theme/theme';
@@ -21,12 +21,13 @@ export class AppRoot {
   @State() newItem: Expense = null;
   @State() activeLightMode = true;
 
-  @Element()
-  private el: HTMLElement;
-
   componentDidLoad() {
     this.getData();
-    this.setTheme('light');
+    const theme = localStorage.getItem('theme');
+    if (theme) {
+      this.activeLightMode = theme === Themes.light;
+    }
+    this.setTheme(theme || Themes.light);
   }
 
   getData = () => {
@@ -40,7 +41,6 @@ export class AppRoot {
 
   @Listen('updateItem', { target: 'body' })
   updateForm(event: CustomEvent<any>) {
-    console.log(this.el.shadowRoot)
     this.updatingData = event.detail;
   }
 
@@ -99,6 +99,7 @@ export class AppRoot {
     this.activeLightMode = !this.activeLightMode;
     const mode = this.activeLightMode ? Themes.light : Themes.dark;
     this.setTheme(mode);
+    localStorage.setItem('theme', mode);
   };
 
   setTheme = (mode: string) => {
@@ -113,13 +114,13 @@ export class AppRoot {
       <div>
         <div class="theme-mode-wrap">
           Dark mode
-          <app-switch-btn></app-switch-btn>
+          <app-switch-btn checked={!this.activeLightMode}></app-switch-btn>
         </div>
         <main class="content">
           <app-expenses-form updatingData={this.updatingData}></app-expenses-form>
           <div class="content__right">
             <app-expenses-list list={this.list}></app-expenses-list>
-            <app-stacked-chart data={this.list}></app-stacked-chart>
+            {this.list.length > 0 && <app-stacked-chart data={this.list}></app-stacked-chart>}
           </div>
         </main>
       </div>
