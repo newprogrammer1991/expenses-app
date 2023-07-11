@@ -1,10 +1,17 @@
-import { Component, Event, EventEmitter, Prop, State, Watch, h } from '@stencil/core';
-import { urls, initialExpensesForm } from '../../constants/constant.js';
+import { Component, Event, EventEmitter, Prop, State, Watch, h, Listen, Element } from '@stencil/core';
+import { urls } from '../../constants/constant.js';
 import axios from 'axios';
 import { Expense } from '../../interfaces/expense';
 
 const generateId = () => {
   return String(Math.floor(Math.random() * 99999999));
+};
+
+const initialVForm = {
+  id: '',
+  description: '',
+  amount: null,
+  date: '',
 };
 
 @Component({
@@ -20,7 +27,10 @@ export class AppExpensesForm {
     description: string;
     amount: number;
     date: string;
-  } = initialExpensesForm;
+  } = initialVForm;
+
+  @Element()
+  private el: HTMLElement;
 
   componentDidLoad() {
     this.formModel.id = generateId();
@@ -33,7 +43,12 @@ export class AppExpensesForm {
     });
   }
 
-  onFormSubmit = async (updatingData, e) => {
+  @Listen('updateItem', { target: 'body' })
+  updateForm() {
+    this.el.shadowRoot.querySelector('app-input').shadowRoot.querySelector('input').focus();
+  }
+
+  onFormSubmit = async (updatingData: Expense, e) => {
     e.preventDefault();
 
     const obj = {
@@ -94,7 +109,8 @@ export class AppExpensesForm {
   };
 
   @Event({ bubbles: true, composed: true }) updateListItem: EventEmitter<any>;
-  sendUpdatedData(item: any) {
+  sendUpdatedData(item: Expense) {
+    console.log(item);
     this.updateListItem.emit(item);
   }
 

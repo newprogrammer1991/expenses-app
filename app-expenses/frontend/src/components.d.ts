@@ -10,7 +10,6 @@ export { Expense } from "./interfaces/expense";
 export namespace Components {
     interface AppButton {
         "content": string;
-        "loading": boolean;
         "onClick": any;
     }
     interface AppExpensesForm {
@@ -104,7 +103,6 @@ declare global {
 declare namespace LocalJSX {
     interface AppButton {
         "content"?: string;
-        "loading"?: boolean;
         "onClick"?: any;
     }
     interface AppExpensesForm {

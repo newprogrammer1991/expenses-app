@@ -1,4 +1,4 @@
-import { Component, Listen, h, State } from '@stencil/core';
+import { Component, Listen, h, State, Element } from '@stencil/core';
 import { urls } from '../../constants/constant.js';
 import { Expense } from '../../interfaces/expense';
 import { themes } from '../../theme/theme';
@@ -21,6 +21,9 @@ export class AppRoot {
   @State() newItem: Expense = null;
   @State() activeLightMode = true;
 
+  @Element()
+  private el: HTMLElement;
+
   componentDidLoad() {
     this.getData();
     this.setTheme('light');
@@ -37,15 +40,17 @@ export class AppRoot {
 
   @Listen('updateItem', { target: 'body' })
   updateForm(event: CustomEvent<any>) {
+    console.log(this.el.shadowRoot)
     this.updatingData = event.detail;
   }
 
   @Listen('updateListItem', { target: 'body' })
   onSaveClick(event: CustomEvent<any>) {
-    const newValue = event.detail;
+    const newValue = { ...event.detail };
     const founIndex = this.list.findIndex(item => item.id === newValue.id);
     if (founIndex > -1) {
       this.list[founIndex] = newValue;
+      this.list = [...this.list];
     } else {
       this.list = [...this.list, newValue];
     }
@@ -74,7 +79,7 @@ export class AppRoot {
     this.toggleTheme();
   }
 
-  sendDeleteRequest = async (apiUrl, id) => {
+  sendDeleteRequest = async (apiUrl: string, id: string) => {
     try {
       const result = await axios.delete(`${apiUrl}/${id}`, {
         withCredentials: false,

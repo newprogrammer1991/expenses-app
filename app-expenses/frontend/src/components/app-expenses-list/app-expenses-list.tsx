@@ -23,7 +23,6 @@ export class AppExpensesList {
       return (
         <div class="expenses__item">
           <div>
-            {item.id}
             <div class="expenses__item-date">{item.date}</div>
             <div class="expenses__item-desc">{item.description}</div>
           </div>
@@ -31,7 +30,6 @@ export class AppExpensesList {
             <span class="expenses__item-amount">{item.amount} USD</span>
             <div class="expenses__item-btns">
               <app-button content="Edit" onClick={() => this.onUpdateItemClick(item)}></app-button>
-
               <app-button content="Delete" onClick={() => this.onDeleteItemClick(item)}></app-button>
             </div>
           </div>

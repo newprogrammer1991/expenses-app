@@ -14,7 +14,7 @@ export class AppSwitchBtn {
         <div>
           <label class="switch-btn">
             <input type="checkbox" onClick={() => this.swithBtnChanged.emit(true)}/>
-            <span class="slider round"></span>
+            <span class="slider"></span>
           </label>
         </div>
       </Host>
