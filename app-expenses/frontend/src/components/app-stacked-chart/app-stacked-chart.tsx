@@ -36,6 +36,10 @@ export class ChartContainer {
   }
 
   componentDidLoad(): void {
+    this.initChart();
+  }
+
+  private initChart() {
     this.canvas = this.el.shadowRoot.querySelector('canvas');
     this.context = this.canvas.getContext('2d');
 
